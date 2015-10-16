@@ -1,0 +1,36 @@
+
+<script>  $(document).ready(function() {
+    $('select').material_select();
+  });</script>
+<ul class="side-nav fixed">
+  <h1>Review Books!</h1>
+    <h6>Your Search Starts Here</h6>
+      <li>
+        <md-input-container>
+        <div class="input-field">
+          <input ng-model = "regSearchText" type="text">
+          <label>Enter Search</label>
+        </div>
+      </md-input-container>
+      </li>
+      <li>
+        <div>
+          <div class="input-field col s3">
+            <select ng-model = "typeOfSearch">
+              <option value="" disabled selected>What are you searching for?</option>
+              <option value="title">Title</option>
+              <option value="author">Author</option>
+            </select>
+            <label>Materialize Select</label>
+          </div>
+        </div>
+      </li>
+      <li>
+        <md-input-container>
+        <button class="btn waves-effect waves-light" type="submit" ng-click = "getBooksRegSearch(regSearchText)" name="action" > Search!
+          <i class="material-icons done"></i>
+        </button>
+      </md-input-container>
+
+    </li>
+  </ul>

@@ -1,0 +1,32 @@
+{
+  "name": "date-a-book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bryanschauerte/date-a-book.git"
+  },
+  "author": "Bryan Schauerte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bryanschauerte/date-a-book/issues"
+  },
+  "homepage": "https://github.com/Bryanschauerte/date-a-book#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "google-oauth2": "^0.1.0",
+    "mongoose": "^4.1.10",
+    "passport": "^0.2.2",
+    "passport-facebook": "^2.0.0",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth2": "^0.1.6"
+  }
+}
