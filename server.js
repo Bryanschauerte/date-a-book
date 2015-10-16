@@ -41,25 +41,31 @@ app.use(passport.session());
 	}, function( token, refreshToken, profile, done ) {
 		process.nextTick(function() {
 
-			User.findOne({ 'userEmail': profile.emails[0].value, username: profile.displayName }, function( err, user ) {
+			User.findOne({'google.id': profile.id}, function(err, user){
+				console.log(profile);
 				if (err) {
-					return done(err);
-				}
+                return done(err);
+            }
+				if (!user) {
+            user = new User({
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                username: profile.username,
+                google: profile._json
+            });
+						console.log(234234324, user);
+            user.save(function(err) {
+                if (err) console.log(err);
+                return done(err, user);
+            });
+        } else {
+            //found user. Return
+						console.log("user", user)
+            return done(err, user);
+        };
 
-				if (user) {
-					return done(null, user);
-				} else {
 
-					User.create({userEmail: profile.emails[0].value, username: profile.displayName}, function(err, user){
-						if(err){
-							res.status(500).send(err)
-						}else {
-							console.log(res);
-							return done(null, user);
-						}
-					});
-				}
-			})
+		});
 		})
 	}))
 
@@ -95,16 +101,7 @@ passport.use(new FacebookStrategy({
 						console.log("user", user)
             return done(err, user);
         };
-			// User.findOne({'userEmail': profile.emails[0].value}, function(err, user){
-			// 	if(user){return done(null, user)}
-			// 	  else{
-			// 			User.create({userEmail: profile.emails[0].value}, function (err, user) {
-			// 				console.log(err, user)
-			// 			});
-			//
-			// 				return done(null, user)
-			// 		}
-			// })
+
 
 		});
 	}
@@ -112,12 +109,18 @@ passport.use(new FacebookStrategy({
 
 
 //google ENDPOINTS
-	app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+//try= removed scope after google, , { scope: ['profile', 'email'] }
+
+	app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+//try = added a callback to cl the res
 	app.get('/api/google/callback', passport.authenticate('google', {
 		successRedirect: '/#/pastReads',
-		failureRedirect: '/'
-	}));
+		failureRedirect: '/login'
+	}), function(req, res){
+		console.log(res);
+	}
+);
 
 //facebook ENDPOINTS
 // app.get('/auth/facebook/', passport.authenticate('facebook', {scope: 'email'}));

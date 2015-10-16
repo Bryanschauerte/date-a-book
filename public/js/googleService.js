@@ -1,47 +1,59 @@
 var app = angular.module('dateABook').service('googleService', function($http, hidden, $q){
 
-this.formatData = function(data){
-  return {
-
-    Author: data.volumeInfo.authors,
-    Title: data.volumeInfo.title,
-    Description: data.description,
-    ImageLinkMed: data.imageLinks.medium,
-    ImageLinkMed: data.imageLinks.large,
-    category: data.mainCategory
 
 
-
-  }
-
-},
-
-
-
-  this.getBooksRegSearch = function(regSearchText, critera){
+  this.getBooksRegSearch = function(regSearchText, typeOfSearch){
 console.log(regSearchText);
 
 var deferred = $q.defer();
-
-    return $http({
+    $http({
       method: "GET",
-      url: "https://www.googleapis.com/books/v1/volumes?q=intitle:'" + regSearchText + "'",
+      url: "https://www.googleapis.com/books/v1/volumes?q=in" + typeOfSearch + ":'" + regSearchText + "'",
       key: hidden.bookApiKey
     }).then(function(res){
-      var parsedResponse = res.data
-      console.log(parsedResponse);
-
+      var parsedResponse = res.data.items;
       var formatedData = [];
       for(var i = 0; i < parsedResponse.length; i ++){
-        formatedData.push(this.formatedData(parsedResponse[i]))
+        var item = {
+          author: parsedResponse[i].volumeInfo.authors,
+          title: parsedResponse[i].volumeInfo.title,
+          description: parsedResponse[i].volumeInfo.description,
+          // image: parsedResponse[i].volumeInfo.imageLinks.thumbnail,
+          // ImageLinkLarge: parsedResponse[i].volumeInfo.imageLinks.large,
+          previewLink: parsedResponse[i].volumeInfo.previewLink,
+          category: parsedResponse[i].mainCategory
+        }
+        formatedData.push(item)
       }
       deferred.resolve(formatedData);
-    }.bind(this));
-
-
-
+      console.log (formatedData)
+    });
     return deferred.promise;
-
   }
 
 })
+
+//
+// var item = {
+//   Author: parsedResponse[i].volumeInfo.authors,
+//   Title: parsedResponse[i].volumeInfo.title,
+//   Description: parsedResponse[i].volumeInfo.description,
+//
+//   image: (if(parsedResponse[i].volumeInfo.imageLinks.thumbnail){
+//     parsedResponse[i].volumeInfo.imageLinks.thumbnail
+//   }else{
+//     "no Image"
+//   }),
+//
+//   ImageLinkLarge: (if(parsedResponse[i].volumeInfo.imageLinks.large){
+//     parsedResponse[i].volumeInfo.imageLinks.large
+//   }else{
+//     "no Image"
+//   }),
+//   previewLink: (if(parsedResponse[i].volumeInfo.previewLink){
+//     parsedResponse[i].volumeInfo.previewLink
+//   }else {
+//     "no preview"
+//   }),
+//   category: parsedResponse[i].mainCategory
+// }
