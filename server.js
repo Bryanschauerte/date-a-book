@@ -139,12 +139,23 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
  //  });
 
  app.put('/api/user', userCtrl.addUser);
+ app.get('/api/user', userCtrl.getUser);
+
+
+//this and makeReview for when its a book already in the db
+ app.get('/api/user/:id', bookCtrl.getBook)
+
+ app.get('/api/book/', bookCtrl.getBookByName)
+
+//these two for when reviewing a new book
  app.put('/api/book', bookCtrl.addBook);
+ app.put('/api/book/:id', bookCtrl.makeReview);
+
 
  app.put('/api/book', bookCtrl.editBook);
 
  //get/reslove/then/scope setting
-app.get('/api/user', userCtrl.getUser);
+
 
 
 

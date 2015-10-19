@@ -7,13 +7,7 @@ var app = angular.module('dateABook', ['ngRoute', 'ngMaterial'])
   $routeProvider
     .when('/home', {
       templateUrl: 'templates/home.html'
-      // resolve: {//this gets commented out
-      //   getUser: function(userService) {
-      //     return userService.currentUser().then(function(resp) {
-      //       return resp;
-      //     });
-      //   }
-      // }
+
     })
 
     .when('/browseBooks', {
@@ -55,12 +49,3 @@ var app = angular.module('dateABook', ['ngRoute', 'ngMaterial'])
 
 
 });
-//   app.config([
-//     '$interpolateProvider', function($interpolateProvider) {
-//       return $interpolateProvider.startSymbol('{(').endSymbol(')}');
-//     }
-//   ]);
-//
-//   app.config(function ($locationProvider) {
-//   $locationProvider.html5Mode(true);
-// });

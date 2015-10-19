@@ -12,18 +12,29 @@ var deferred = $q.defer();
       key: hidden.bookApiKey
     }).then(function(res){
       var parsedResponse = res.data.items;
+
       var formatedData = [];
       for(var i = 0; i < parsedResponse.length; i ++){
         var item = {
           author: parsedResponse[i].volumeInfo.authors,
           title: parsedResponse[i].volumeInfo.title,
           description: parsedResponse[i].volumeInfo.description,
-          // image: parsedResponse[i].volumeInfo.imageLinks.thumbnail,
-          // ImageLinkLarge: parsedResponse[i].volumeInfo.imageLinks.large,
+          publishDate: parsedResponse[i].volumeInfo.publishedDate,
+          //  ImageLinkLarge: parsedResponse[i].volumeInfo.imageLinks.large,
           previewLink: parsedResponse[i].volumeInfo.previewLink,
-          category: parsedResponse[i].mainCategory
+          genre: parsedResponse[i].mainCategory
         }
-        formatedData.push(item)
+        formatedData.push(item);
+
+        // var notThere ={
+        //   notOnGoogle :
+        //   author: '',
+        //   title: '',
+        //   publishDate: '',
+        //   genre: ''
+        // }
+        //
+        // formatedData.push(notThere);
       }
       deferred.resolve(formatedData);
       console.log (formatedData)

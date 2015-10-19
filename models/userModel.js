@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
 	name: String,
 	password: String,
 	// token: String,
-	booksReviewed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
+	booksReviewed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]// push in the user_id
 });
 
 module.exports = mongoose.model('User', userSchema);
