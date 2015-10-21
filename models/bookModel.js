@@ -1,5 +1,5 @@
-var mongoose = require('mongoose'),
-	User = require('./userModel.js');
+var mongoose = require('mongoose');
+	// User = require('./userModel.js');
 	// Schema = mongoose.Schema;
 
 var Book = new mongoose.Schema({
@@ -10,14 +10,9 @@ var Book = new mongoose.Schema({
 		image: [{type: String}],
 		description: {type: String},
 		publishDate: {type: String},
-
-
-
+		reviewedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],//push in the user
     reviews: [{
-
-				reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },// push in the user_id
 				attr: {
-
 					violence: {type: Number},
 					loveEct: {type: Number},
 					suspence: {type: Number},
@@ -28,8 +23,7 @@ var Book = new mongoose.Schema({
 					supernaturalContent: {type: Number},
 					understandability: {type:Number}
 					}
-
-      }],
+      }]
 
 
 

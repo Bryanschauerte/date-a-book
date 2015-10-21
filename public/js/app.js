@@ -1,4 +1,4 @@
-var app = angular.module('dateABook', ['ngRoute', 'ngMaterial'])
+var app = angular.module('dateABook', ['ngRoute','ngMaterial'])
 .config(function($routeProvider, $mdThemingProvider){
 
 
@@ -18,6 +18,11 @@ var app = angular.module('dateABook', ['ngRoute', 'ngMaterial'])
 
     .when('/pastReads', {
       templateUrl: 'templates/pastReads.html'
+      // ,
+      // controller: "mainCtrl",
+      // resolve: {
+      //
+      // }
 
     })
 

@@ -1,11 +1,12 @@
-var Book = require('../models/userModel.js');
+var Book = require('../models/bookModel.js');
+var mongoose = require('mongoose');
 
 module.exports = {
 
   addBook: function(req, res){
     new Book(req.body).save(function(err, data){
-      if(error){
-        res.status.send(err);
+      if(err){
+        res.status(500).send(err);
       } else {
         res.send(data);
         }
@@ -14,20 +15,20 @@ module.exports = {
   },
 
   getBookByName: function(req, res){
-//is that okay to do?
-    Book.find("name" : req.body.name)
-    .then(function(err, book){
-      if(err){
-        res.status(500).send(err)
-      }else {
-        res.send(book);
-      }
-    });
+console.log(req);
+    Book.find({'title': req.params.id},
+      function(err, book){
+        if(err){
+          res.status(500).send(err)
+        }else {
+          res.send(book);
+        }
+      });
   },
 
   getBook: function(req, res){
 
-    Book.findById(req.query.id)
+    Book.findById(req.params.id)
     .then(function(err, book){
       if(err){
         res.status(500).send(err)
@@ -36,46 +37,37 @@ module.exports = {
       }
     });
   },
-//need to check
 
-//
-// addReview: function(req, res){
-//   Book.findById(req.query.id).insert(req.body).save(function(err, data){
-//     if(err){
-//       res.status(500).send(err);
-//     } else{
-//       res.send(data)
-//     }
-//   });
-// },
 
-  makeReview: function(req, res){
-    Book.find({'object_id': req.query.id})
-    .then(function(err, book){
-      book.reviews.push({
-        reviewedBy: req.body.reviewedBy,
-        attr: {
-          violence: req.body.violence,
-          loveEct: req.body.loveEct,
-          suspence: req.body.suspence,
-          realism: req.body.realism,
-          horror: req.body.horror,
-          humor: req.body.humor,
-          scienceFiction: req.body.scienceFiction,
-          supernaturalContent: req.body.supernaturalContent,
-          understandability: req.body.understandability
+  makeReview: function(req, res) {
+    Book.findById(req.params.id, function( err, book ) {
+      if(err){
+        res.send(err);
+      }
+      //here
+      book.reviews.push(req.body);
+        book.save(function(err, data) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.send(data);
+          }
+        })
+    })
+  },
 
-        }
-
-      }).save(function(err, data){
-        if(err){
-          res.status(500).send(err)
-        }else {
+  addReviewDoer: function(req, res) {
+    Book.findById(req.params.id, function( err, book ) {
+      console.log(book);
+//need the actual id In order to be able to populate that bad body.
+      book.reviewedBy.push(new mongoose.Types.ObjectId(req.body.userID));
+      book.save(function(err, data) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
           res.send(data);
         }
       })
-
-
     })
   }
 

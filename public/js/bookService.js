@@ -1,17 +1,23 @@
-var app = angular.module('dateABook').service('booksService', function($http, $q){
+var app = angular.module('dateABook').service('bookService', function($http, $q){
 
 
 
 
 
 this.getBookIdFromTitle  = function(bookTitle){
-  return http({
+  return $http({
     method: 'GET',
-    url:"http://localhost:8881/api/book",
-    data: {
-      name: bookTitle
-    }
+    url:"http://localhost:8881/api/bookName/" +bookTitle
+
   });
+
+},
+
+this.getBookFromId = function(bookId){
+  return $http({
+    method: "GET",
+    url:"http://localhost:8881/api/book/" +bookId
+  })
 
 }
 
@@ -38,14 +44,14 @@ this.addBook = function(title, author, genre, image, description, publishDate){
 },
 
 
-
-  this.addReview = function(userID, bookID, violence, loveEct, suspence, realism, horror, humor, scienceFiction, supernaturalContent, understandability){
+//this plus doer
+  this.addReview = function( bookID, violence, loveEct, suspence, realism, horror, humor, scienceFiction, supernaturalContent, understandability){
     return $http({
-      method: "POST",
+      method: "PUT",
       url:"http://localhost:8881/api/book/" +bookID,
       data: {
 
-        userID: userID,
+attr: {
         violence: violence,
         loveEct: loveEct,
         suspence: suspence,
@@ -55,10 +61,25 @@ this.addBook = function(title, author, genre, image, description, publishDate){
         scienceFiction: scienceFiction,
         supernaturalContent: supernaturalContent,
         understandability: understandability
+}
+      }
+    })
+  },
+
+  this.addBookReviewDoer = function(userID, bookID){
+
+    return $http({
+      method: "PUT",
+      url:"http://localhost:8881/api/bookReviewer/" +bookID,
+      data: {
+
+        userID: userID
 
       }
     })
   }
+
+
 
 //above  these two need to be done to add a book and the reviews to the book
 

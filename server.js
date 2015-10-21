@@ -11,26 +11,20 @@ var express = require('express'),
 	GoogleStrategy = require('passport-google-oauth2').Strategy,
 	FacebookStrategy = require('passport-facebook').Strategy,
 	goauth2 = require("google-oauth2");
-
-
+//the user of the session
+var thisUser ={}
 //controllers for models
 var userCtrl = require('./modelControllers/userCtrl.js'),
 		bookCtrl = require('./modelControllers/bookCtrl.js');
 
-
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
-
-//session middleware
 app.use(session({secret: "BananaMonk"}));
-
-//initiating passport
 app.use(passport.initialize());
-//use passport session
-
 app.use(passport.session());
 
 ////google Strategy
-
 
 	passport.use(new GoogleStrategy({
 
@@ -60,11 +54,12 @@ app.use(passport.session());
             });
         } else {
             //found user. Return
-						console.log("user", user)
+						console.log("user", user);
+						thisUser.userInfo = user;
+
+
             return done(err, user);
         };
-
-
 		});
 		})
 	}))
@@ -99,6 +94,7 @@ passport.use(new FacebookStrategy({
         } else {
             //found user. Return
 						console.log("user", user)
+						thisUser.userInfo = user;
             return done(err, user);
         };
 
@@ -107,54 +103,35 @@ passport.use(new FacebookStrategy({
 	}
 ));
 
-
-//google ENDPOINTS
-
-//try= removed scope after google, , { scope: ['profile', 'email'] }
-
 	app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-//try = added a callback to cl the res
+
 	app.get('/api/google/callback', passport.authenticate('google', {
-		successRedirect: '/#/pastReads',
-		failureRedirect: '/login'
-	}), function(req, res){
-		console.log(res);
-	}
-);
+			successRedirect: '/#/pastReads',
+			failureRedirect: '/login'
+		}), function(req, res){
+			console.log(res);
+		}
+	);
 
-//facebook ENDPOINTS
-// app.get('/auth/facebook/', passport.authenticate('facebook', {scope: 'email'}));
 app.get('/auth/facebook/', passport.authenticate('facebook'));
-
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-	 successRedirect: '/#/pastReads',//reslove on route (front end) that would do another get req that returns the user
+	 successRedirect: '/#/pastReads',
 	 failureRedirect: '/login'
  }), function(req, res) {
 	 console.log(req.user);
  });
 
- // app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
- // 	 console.log(1212121212, req.user);
- //  res.json(req.user)
- //  });
-
  app.put('/api/user', userCtrl.addUser);
- app.get('/api/user', userCtrl.getUser);
-
-
-//this and makeReview for when its a book already in the db
- app.get('/api/user/:id', bookCtrl.getBook)
-
- app.get('/api/book/', bookCtrl.getBookByName)
-
-//these two for when reviewing a new book
- app.put('/api/book', bookCtrl.addBook);
+ app.get('/api/user', function(req, res){
+	 res.send(thisUser);
+})
+ app.get('/api/user/facebook', userCtrl.getFaceBookUser);
+ app.get('/api/user/google', userCtrl.getGoogleUser);
+ app.get('/api/book/:id', bookCtrl.getBook);
+ app.get('/api/bookName/:id', bookCtrl.getBookByName);
+ app.post('/api/book', bookCtrl.addBook);
  app.put('/api/book/:id', bookCtrl.makeReview);
-
-
- app.put('/api/book', bookCtrl.editBook);
-
- //get/reslove/then/scope setting
+ app.put('/api/bookReviewer/:id', bookCtrl.addReviewDoer);
 
 
 
@@ -183,12 +160,3 @@ mongoose.connection.once('open', function(){
 app.listen(port, function(){
   console.log("listening on port: " + port);
 });
-
-
-
-
-//
-// app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
-// 	console.log(1212121212, req.user);
-// 	res.json(req.user) the thing making the call in te front end, .then(function(err, date){ scope.user = data})
-//  });    get inpoint that returns the json object. use user = res.body
