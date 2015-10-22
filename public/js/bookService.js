@@ -13,13 +13,21 @@ this.getBookIdFromTitle  = function(bookTitle){
 
 },
 
+this.getAllBooks = function(){
+  return $http({
+    method: "GET",
+    url:"http://localhost:8881/api/book/"
+  })
+
+},
+
 this.getBookFromId = function(bookId){
   return $http({
     method: "GET",
     url:"http://localhost:8881/api/book/" +bookId
   })
 
-}
+},
 
 
 
@@ -81,7 +89,6 @@ attr: {
 
 
 
-//above  these two need to be done to add a book and the reviews to the book
 
 
 

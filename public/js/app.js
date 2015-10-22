@@ -11,7 +11,8 @@ var app = angular.module('dateABook', ['ngRoute','ngMaterial'])
     })
 
     .when('/browseBooks', {
-      templateUrl: 'templates/browseBooks.html'
+      templateUrl: 'templates/browseBooks.html',
+      controller: 'searchCtrl'
 
 
     })

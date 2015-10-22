@@ -34,6 +34,4 @@ this.getUser = function(){
 
 
 
-
-
 });

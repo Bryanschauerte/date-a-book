@@ -3,6 +3,18 @@ var mongoose = require('mongoose');
 
 module.exports = {
 
+  getAllBooks: function(req, res){
+    Book.find({},
+      function(err, book){
+        if(err){
+          res.status(500).send(err)
+        }else {
+          res.send(book);
+        }
+      });
+    },
+
+
   addBook: function(req, res){
     new Book(req.body).save(function(err, data){
       if(err){

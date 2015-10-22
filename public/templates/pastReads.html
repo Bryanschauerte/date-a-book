@@ -106,7 +106,7 @@
     </div>
   </div>
 
-    <button class="btn waves-effect waves-light" ng-if = "googleBookSearch.length != 0 && !addingABook && !reviewTime" ng-click = "addBookNotListed()"type="submit" name="action">Add a book Not listed
+    <button class="btn waves-effect waves-light" ng-if = "showAddbookButton &&!addingABook && !reviewTime" ng-click = "addBookNotListed()"type="submit" name="action">Add a book Not listed
     <i class="material-icons right">send</i>
   </button>
 </div>
@@ -186,15 +186,15 @@
 
 
 
-  <form action="#" ng-model = "bookToAdd.suspence">
+  <form action="#" >
     <p class="range-field"><b>Suspence: {{bookToAdd.suspence}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.suspence"/>
     </p>
   </form>
 
 
-  <form action="#" ng-model = "bookToAdd.realism">
-    <p class="range-field"><b>Realism: {{bookToAdd.suspence}}</b>
+  <form action="#" >
+    <p class="range-field"><b>Realism: {{bookToAdd.realism}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.realism"/>
     </p>
   </form>
@@ -283,7 +283,7 @@
 
 
         <form action="#" ng-model = "testRate.realism">
-          <p class="range-field"><b>Realism: {{testRate.suspence}}</b>
+          <p class="range-field"><b>Realism: {{testRate.realism}}</b>
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.realism"/>
           </p>
         </form>

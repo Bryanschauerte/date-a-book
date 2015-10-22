@@ -5,7 +5,7 @@ $scope.searchCriteria = ["Author", "Title"];
 $scope.reviewTime = false;
 $scope.addingABook = false;
 $scope.enterInfo = true;
-
+$scope.showAddbookButton = false;
 
 
 
@@ -17,7 +17,7 @@ $scope.addBookNotListed = function(){
     $('select').material_select();
   });
   $scope.getUser();
-
+console.log($scope.user);
 }
 
 $scope.notAddingABook= function(){
@@ -82,7 +82,7 @@ $scope.getUser = function(){
     })
 
   }
-
+console.log($scope.user);
 
 };
 
@@ -90,12 +90,13 @@ $scope.getUser = function(){
 $scope.googleBookSearch = [];
 
 $scope.getBooksRegSearch = function(regSearchText, typeOfSearch){
+  $scope.showAddbookButton = true;
   //check to see if in db
 if(typeOfSearch == "title"){
     bookService.getBookIdFromTitle(regSearchText).then(function(response){
-    console.log(response);
 
-      if(response == undefined){
+
+      if(response == undefined || []){
         $scope.regBooksToShow = googleService.getBooksRegSearch(regSearchText, typeOfSearch)
           .then(function(res){ $scope.googleBookSearch = res;  })
       }else {
@@ -112,6 +113,7 @@ if(typeOfSearch == "title"){
         .then(function(res){  $scope.googleBookSearch = res; })
       }
       $scope.enterInfo = false;
+        console.log($scope.googleBookSearch);
 };
 
 $scope.resetSelect = function(){
@@ -123,10 +125,30 @@ $scope.targetForReview= function(targetForReview){
 
   $scope.targetBookForReview = targetForReview;
   $scope.reviewTime = true;
+  $scope.getUser()
 }
                                                         //here add to db
 $scope.doAReview = function(testRate){
-  alert(testRate);
+
+
+  var newBookId = '';
+    $scope.targetBookForReview.image = "n/a";
+
+      bookService.addBook($scope.targetBookForReview.title, $scope.targetBookForReview.author, $scope.targetBookForReview.genre, $scope.targetBookForReview.image, $scope.targetBookForReview.description, $scope.targetBookForReview.publishDate)
+        .then(function(response){
+        newBookId = response.data._id;
+      })
+          .then(function(response){
+            bookService.addReview(newBookId, testRate.violence, testRate.loveEct, testRate.suspence, testRate.realism, testRate.horror, testRate.humor, testRate.scienceFiction, testRate.supernaturalContent, testRate.understandability)})
+            .then(function(response){
+              bookService.addBookReviewDoer($scope.user._id, newBookId)
+            })
+              .then(function(response){
+                $scope.reviewTime = false;});
+
+
+
+
 
 }
 

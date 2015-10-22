@@ -127,6 +127,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 })
  app.get('/api/user/facebook', userCtrl.getFaceBookUser);
  app.get('/api/user/google', userCtrl.getGoogleUser);
+ app.get('/api/book', bookCtrl.getAllBooks);
  app.get('/api/book/:id', bookCtrl.getBook);
  app.get('/api/bookName/:id', bookCtrl.getBookByName);
  app.post('/api/book', bookCtrl.addBook);

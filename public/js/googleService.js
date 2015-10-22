@@ -3,7 +3,7 @@ var app = angular.module('dateABook').service('googleService', function($http, h
 
 
   this.getBooksRegSearch = function(regSearchText, typeOfSearch){
-console.log(regSearchText);
+
 
 var deferred = $q.defer();
     $http({
