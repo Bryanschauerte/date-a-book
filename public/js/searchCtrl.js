@@ -44,13 +44,18 @@ $scope.lookingFor = {
 
 
 $scope.getUser = function(){
+
+
   if(!$scope.user){
     $scope.user = userService.getUser().then(function(res){
-      $scope.user =res.userInfo;
-
+      $scope.user =res;
+console.log($scope.user);
     })
+
   }
+
 };
+
 
 $scope.getAllBooks = function() {
 
@@ -69,7 +74,6 @@ $scope.count = 0;
   $scope.showSearchFields = false;
   //check to see if in db
   $scope.searchHappening = true;
-
 
   $scope.books = bookService.getAllBooks()
   .then(function(resolve){
@@ -97,6 +101,7 @@ $scope.count = 0;
 
       if(item.attr["loveEct"]){
     $scope.crit.loveEct += Number(item.attr["loveEct"]);
+
       }
       if(item.attr["violence"]){
 
@@ -128,6 +133,7 @@ $scope.count = 0;
 
 
     for(var part in $scope.crit){
+      // console.log(part, $scope.crit[part])
       if (book.reviews.length > 1){
   $scope.crit[part]= ($scope.crit[part])/(book.reviews.length)
   }
@@ -137,113 +143,60 @@ $scope.count = 0;
 
 console.log($scope.crit);
 
-function checker(obj){
+var checker = function(){
   var matchCount = 0;
 
-  for(var item in obj){
-
-
-        if(item == "loveEct"){
-            if((lookingFor["loveEct"]-range) <= obj["loveEct"] <= (lookingFor["loveEct"]+range)){
-              matchCount +=1
+  for(var item in $scope.crit){
+      if(item == "loveEct"){
+            if(((lookingFor["loveEct"]-range) <= $scope.crit["loveEct"]) && ( $scope.crit["loveEct"]<= (lookingFor["loveEct"]+range))){
+              matchCount +=1;
             }
       }
         if(item == "violence"){
-            if((lookingFor["violence"]-range) <= obj["violence"] <= (lookingFor["violence"]+range)){
-              matchCount +=1
+            if((lookingFor["violence"]-range) <= $scope.crit["violence"] <= (lookingFor["violence"]+range)){
+              matchCount +=1;
             }
           }
         if(item == "suspence"){
-          if((lookingFor["suspence"]-range) <= obj["suspence"] <= (lookingFor["suspence"]+range)){
-                matchCount +=1
+          if((lookingFor["suspence"]-range) <= $scope.crit["suspence"] <= (lookingFor["suspence"]+range)){
+                matchCount +=1;
           }
         }
         if(item == "realism"){
-          if((lookingFor["realism"]-range) <= obj["realism"] <= (lookingFor["realism"]+range)){
-                matchCount +=1
+          if((lookingFor["realism"]-range) <= $scope.crit["realism"] <= (lookingFor["realism"]+range)){
+                matchCount +=1;
           }
         }
         if(item == "horror"){
-          if((lookingFor["horror"]-range) <= obj["horror"] <= (lookingFor["horror"]+range)){
-              matchCount +=1
+          if((lookingFor["horror"]-range) <= $scope.crit["horror"] <= (lookingFor["horror"]+range)){
+              matchCount +=1;
           }
         }
         if(item == "scienceFiction"){
-          if((lookingFor["scienceFiction"]-range) <= obj["scienceFiction"] <= (lookingFor["scienceFiction"]+range)){
-                matchCount +=1
+          if((lookingFor["scienceFiction"]-range) <= $scope.crit["scienceFiction"] <= (lookingFor["scienceFiction"]+range)){
+                matchCount +=1;
           }
         }
         if(item == "supernaturalContent"){
-          if((lookingFor["supernaturalContent"]-range) <= obj["supernaturalContent"] <= (lookingFor["supernaturalContent"]+range)){
-              matchCount +=1
+          if((lookingFor["supernaturalContent"]-range) <= $scope.crit["supernaturalContent"] <= (lookingFor["supernaturalContent"]+range)){
+              matchCount +=1;
           }
         }
         if(item == "understandability"){
-          if((lookingFor["understandability"]-range) <= obj["understandability"] <= (lookingFor["understandability"]+range)){
-                matchCount +=1
+          if((lookingFor["understandability"]-range) <= $scope.crit["understandability"] <= (lookingFor["understandability"]+range)){
+                matchCount +=1;
           }
         }
-        if(matchCount >= 5){
-          console.log(matchCount)
-        $scope.searchResults.push(item);
-        }
+
     }
 
-
+    if(matchCount >= 5){
+    $scope.searchResults.push(book);
+    console.log('ding')
+    console.log($scope.searchResults)
+    }
 }
-
-checker($scope.crit);
-//
-// for(var item in $scope.crit){
-//
-// console.log(111111, item);
-// console.log(222222, $scope.count);
-//
-//     if(item == "loveEct"){
-//           if((lookingFor["loveEct"]-range) <= $scope.crit["loveEct"] <= (lookingFor["loveEct"]+range)){
-//             $scope.matchCount +=1
-//           }
-//     }
-//     if(item == "violence"){
-//           if((lookingFor["violence"]-range) <= $scope.crit["violence"] <= (lookingFor["violence"]+range)){
-//             $scope.matchCount +=1
-//           }
-//         }
-//       if(item == "suspence"){
-//         if((lookingFor["suspence"]-range) <= $scope.crit["suspence"] <= (lookingFor["suspence"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if(item == "realism"){
-//         if((lookingFor["realism"]-range) <= $scope.crit["realism"] <= (lookingFor["realism"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if(item == "horror"){
-//         if((lookingFor["horror"]-range) <= $scope.crit["horror"] <= (lookingFor["horror"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if(item == "scienceFiction"){
-//         if((lookingFor["scienceFiction"]-range) <= $scope.crit["scienceFiction"] <= (lookingFor["scienceFiction"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if(item == "supernaturalContent"){
-//         if((lookingFor["supernaturalContent"]-range) <= $scope.crit["supernaturalContent"] <= (lookingFor["supernaturalContent"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if(item == "understandability"){
-//         if((lookingFor["understandability"]-range) <= $scope.crit["understandability"] <= (lookingFor["understandability"]+range)){
-//           $scope.matchCount +=1
-//         }
-//       }
-//       if($scope.matchCount >= 5){
-//         console.log($scope.matchCount)
-//       $scope.searchResults.push(item);
-//       }
-//   }
+checker();
 
 })
 })
@@ -254,12 +207,8 @@ for(var i = 0; i < $scope.searchResults.length; i++){
 console.log($scope.searchResults);
 
 };
-//
-// $scope.searchHappening = false;
-//
-//
-//
-// };
+
+
 
 
 $scope.resetSeaches = function(){

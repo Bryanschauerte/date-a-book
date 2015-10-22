@@ -55,7 +55,7 @@ app.use(passport.session());
         } else {
             //found user. Return
 						console.log("user", user);
-						thisUser.userInfo = user;
+						// thisUser.userInfo = user;
 
 
             return done(err, user);
@@ -94,7 +94,7 @@ passport.use(new FacebookStrategy({
         } else {
             //found user. Return
 						console.log("user", user)
-						thisUser.userInfo = user;
+						// thisUser.userInfo = user;
             return done(err, user);
         };
 
@@ -123,7 +123,11 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
  app.put('/api/user', userCtrl.addUser);
  app.get('/api/user', function(req, res){
-	 res.send(thisUser);
+	 if(req.user){
+		return res.status(200).json(req.user)
+	}else {
+		res.status(404).end()}
+
 })
  app.get('/api/user/facebook', userCtrl.getFaceBookUser);
  app.get('/api/user/google', userCtrl.getGoogleUser);

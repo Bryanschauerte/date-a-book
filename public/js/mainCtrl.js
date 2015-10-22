@@ -6,8 +6,8 @@ $scope.reviewTime = false;
 $scope.addingABook = false;
 $scope.enterInfo = true;
 $scope.showAddbookButton = false;
-
-
+//for when google got nothing
+$scope.noSearchResults = false;
 
 
 $scope.addBookNotListed = function(){
@@ -77,12 +77,11 @@ $scope.getUser = function(){
 
   if(!$scope.user){
     $scope.user = userService.getUser().then(function(res){
-      $scope.user =res.userInfo;
-
+      $scope.user =res;
+console.log($scope.user);
     })
 
   }
-console.log($scope.user);
 
 };
 

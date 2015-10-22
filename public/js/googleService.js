@@ -12,6 +12,9 @@ var deferred = $q.defer();
       key: hidden.bookApiKey
     }).then(function(res){
       var parsedResponse = res.data.items;
+      if(parsedResponse == undefined){
+        parsedResponse =[];
+      }
 
       var formatedData = [];
       for(var i = 0; i < parsedResponse.length; i ++){
@@ -38,6 +41,8 @@ var deferred = $q.defer();
       }
       deferred.resolve(formatedData);
       console.log (formatedData)
+    }, function(err){
+      return "none";
     });
     return deferred.promise;
   }
