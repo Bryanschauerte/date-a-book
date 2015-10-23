@@ -24,7 +24,7 @@ $scope.searchResults = [{
   humor:0,
   scienceFiction:0,
   supernaturalContent:0,
-  understandability:0
+  readingLevel:0
 
 }]
 // dummy data
@@ -39,7 +39,7 @@ $scope.lookingFor = {
   humor: 4,
   scienceFiction: 7,
   supernaturalContent: 0,
-  understandability: 0
+  readingLevel: 0
 }
 
 
@@ -93,7 +93,7 @@ $scope.count = 0;
     horror:0,
     scienceFiction:0,
     supernaturalContent:0,
-    understandability:0
+    readingLevel:0
     };
 
 
@@ -122,8 +122,8 @@ $scope.count = 0;
       if (item.attr["supernaturalContent"]){
       $scope.crit.supernaturalContent += Number(item.attr["supernaturalContent"]);
     }
-      if(item.attr["understandability"]){
-    $scope.crit.understandability += Number(item.attr["understandability"]);
+      if(item.attr["readingLevel"]){
+    $scope.crit.readingLevel += Number(item.attr["readingLevel"]);
 
     }
 
@@ -182,8 +182,8 @@ var checker = function(){
               matchCount +=1;
           }
         }
-        if(item == "understandability"){
-          if((lookingFor["understandability"]-range) <= $scope.crit["understandability"] <= (lookingFor["understandability"]+range)){
+        if(item == "readingLevel"){
+          if((lookingFor["readingLevel"]-range) <= $scope.crit["readingLevel"] <= (lookingFor["readingLevel"]+range)){
                 matchCount +=1;
           }
         }
@@ -191,6 +191,7 @@ var checker = function(){
     }
 
     if(matchCount >= 5){
+      book.averageReviews = $scope.crit;
     $scope.searchResults.push(book);
     console.log('ding')
     console.log($scope.searchResults)
@@ -225,7 +226,7 @@ $scope.lookingFor = {
   humor: 0,
   scienceFiction: 0,
   supernaturalContent: 0,
-  understandability: 0
+  readingLevel: 0
 };
 
 $scope.searchResults = [];

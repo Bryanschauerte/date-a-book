@@ -53,7 +53,7 @@ this.addBook = function(title, author, genre, image, description, publishDate){
 
 
 //this plus doer
-  this.addReview = function( bookID, violence, loveEct, suspence, realism, horror, humor, scienceFiction, supernaturalContent, understandability){
+  this.addReview = function( bookID, violence, loveEct, suspence, realism, horror, humor, scienceFiction, supernaturalContent, readingLevel){
     return $http({
       method: "PUT",
       url:"http://localhost:8881/api/book/" +bookID,
@@ -68,7 +68,7 @@ attr: {
         humor: humor,
         scienceFiction: scienceFiction,
         supernaturalContent: supernaturalContent,
-        understandability: understandability
+        readingLevel: readingLevel
 }
       }
     })

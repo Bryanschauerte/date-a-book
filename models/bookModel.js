@@ -21,7 +21,7 @@ var Book = new mongoose.Schema({
 					humor: {type: Number},
 					scienceFiction: {type: Number},
 					supernaturalContent: {type: Number},
-					understandability: {type:Number}
+					readingLevel: {type:Number}
 					}
       }]
 

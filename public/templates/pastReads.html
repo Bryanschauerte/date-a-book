@@ -219,9 +219,9 @@
   </form>
 
 
-  <form action="#" ng-model = "bookToAdd.understandability">
-    <p class="range-field"><b>Understandability : {{bookToAdd.understandability}}</b>
-      <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.understandability"/>
+  <form action="#" ng-model = "bookToAdd.readingLevel">
+    <p class="range-field"><b>Reading Level : {{bookToAdd.readingLevel}}</b>
+      <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.readingLevel"/>
     </p>
   </form>
 
@@ -308,16 +308,16 @@
         </form>
 
 
-        <form action="#" ng-model = "testRate.understandability">
-          <p class="range-field"><b>Understandability : {{testRate.understandability}}</b>
-            <input type="range" id="test5" min="0" max="10" ng-model = "testRate.understandability"/>
+        <form action="#" ng-model = "testRate.readingLevel">
+          <p class="range-field"><b>Reading Level : {{testRate.readingLevel}}</b>
+            <input type="range" id="test5" min="0" max="10" ng-model = "testRate.readingLevel"/>
           </p>
         </form>
 
 
 
       </div>
-      <a class="waves-effect waves-light btn" ng-click = "doAReview(testRate)"><i class="material-icons left">done</i>send</a>
+      <a class="waves-effect waves-light btn" ng-click = "doAReview(targetBookForReview.title, testRate)"><i class="material-icons left">done</i>send</a>
 
 
     </div>

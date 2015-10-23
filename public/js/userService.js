@@ -27,7 +27,6 @@ this.getUser = function(){
     url:"http://localhost:8881/api/user"
   })
   .then(function(response){
-console.log(response)
     return response.data;
 
   });

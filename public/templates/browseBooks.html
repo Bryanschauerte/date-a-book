@@ -113,9 +113,9 @@
     </form>
 
 
-    <form action="#" ng-model = "lookingFor.understandability">
-      <p class="range-field"><b>Understandability : {{lookingFor.understandability}}</b>
-        <input type="range" id="test5" min="0" max="10" ng-model = "lookingFor.understandability"/>
+    <form action="#" ng-model = "lookingFor.readingLevel">
+      <p class="range-field"><b>Reading Level : {{lookingFor.readingLevel}}</b>
+        <input type="range" id="test5" min="0" max="10" ng-model = "lookingFor.readingLevel"/>
       </p>
     </form>
 
@@ -139,7 +139,7 @@
         <div class="card-content white-text">
           <span class="card-title">{{result.title}}</span>
 
-          <p ng-repeat = "author in result.author track by $index"><tr>Author:  {{author}}</tr></p>
+          <p><tr>Author:  {{result.author}}</tr></p>
           <p>{{result.genre}}</p>
           <p>Published:  {{result.publishDate}}</p>
           <p>Description:  {{result.description}}</p>
@@ -155,19 +155,19 @@
 <div class="col s6 m6">
   <div class="card blue darken-1">
     <div class="card-content white-text">
-      <span class="card-title">This book's Scored....</span>
+      <span class="card-title">This book scored an average with all reviewers of....</span>
 
 
-      <p class = "scoreToShow">Romance:  <b> {{result.loveEct}}/10</b></p>
-      <p class = "scoreToShow">Violence:  <b>{{result.violence}}/10</b></p>
-      <p class = "scoreToShow">Suspence:  <b>{{result.suspence}}/10</b></p>
-      <p class = "scoreToShow">Realism:  <b>{{result.realism}}/10</b></p>
-      <p class = "scoreToShow">Horror:  <b>{{result.horror}}/10</b></p>
-      <p class = "scoreToShow">Humor:  <b>{{result.humor}}/10</b></p>
-      <p class = "scoreToShow">Science Fiction:  <b>{{result.scienceFiction}}/10</b></p>
-      <p class = "scoreToShow">Supernatural:  <b>{{result.supernaturalContent}}/10</b></p>
-      <p class = "scoreToShow">Understandability:  <b>{{result.understandability}}/10</b></p>
-
+      <p class = "scoreToShow">Romance:  <b> {{result.averageReviews.loveEct}}/10</b></p>
+      <p class = "scoreToShow">Violence:  <b>{{result.averageReviews.violence}}/10</b></p>
+      <p class = "scoreToShow">Suspence:  <b>{{result.averageReviews.suspence}}/10</b></p>
+      <p class = "scoreToShow">Realism:  <b>{{result.averageReviews.realism}}/10</b></p>
+      <p class = "scoreToShow">Horror:  <b>{{result.averageReviews.horror}}/10</b></p>
+      <p class = "scoreToShow">Humor:  <b>{{result.averageReviews.humor}}/10</b></p>
+      <p class = "scoreToShow">Science Fiction:  <b>{{result.averageReviews.scienceFiction}}/10</b></p>
+      <p class = "scoreToShow">Supernatural:  <b>{{result.averageReviews.supernaturalContent}}/10</b></p>
+      <p class = "scoreToShow">Reading level:  <b>{{result.averageReviews.readingLevel}}/10</b></p>
+<p>{{result}}</p>
     </div>
     <div class="card-action">
       <a href="#">Take me to see how I rated this book!</a>

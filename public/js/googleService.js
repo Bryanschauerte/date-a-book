@@ -40,7 +40,6 @@ var deferred = $q.defer();
         // formatedData.push(notThere);
       }
       deferred.resolve(formatedData);
-      console.log (formatedData)
     }, function(err){
       return "none";
     });
