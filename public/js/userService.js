@@ -30,6 +30,24 @@ this.getUser = function(){
     return response.data;
 
   });
+},
+this.getBooksReviewed = function(userID){
+  return $http({
+    method: "GET",
+    url: "http://localhost:8881/api/user/books/" + userID
+  });
+
+},
+
+this.addReviewToUser = function(userID, bookID){
+
+  return $http({
+    method: "PUT",
+    url:"http://localhost:8881/api/user/addBookReview/" + userID,
+    data: {
+      bookID: bookID
+    }
+  })
 }
 
 

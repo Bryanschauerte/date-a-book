@@ -80,9 +80,7 @@ attr: {
       method: "PUT",
       url:"http://localhost:8881/api/bookReviewer/" +bookID,
       data: {
-
         userID: userID
-
       }
     })
   }

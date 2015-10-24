@@ -120,6 +120,12 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
  }), function(req, res) {
 	 console.log(req.user);
  });
+//node auth middleware
+
+
+
+//
+
 
  app.put('/api/user', userCtrl.addUser);
  app.get('/api/user', function(req, res){
@@ -129,6 +135,10 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 		res.status(404).end()}
 
 })
+//new
+app.get('/api/user/books/:id', userCtrl.getBooksReviewed);
+app.put('/api/user/addBookReview/:id', userCtrl.reviewToAddToUser)
+
  app.get('/api/user/facebook', userCtrl.getFaceBookUser);
  app.get('/api/user/google', userCtrl.getGoogleUser);
  app.get('/api/book', bookCtrl.getAllBooks);
@@ -137,6 +147,8 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
  app.post('/api/book', bookCtrl.addBook);
  app.put('/api/book/:id', bookCtrl.makeReview);
  app.put('/api/bookReviewer/:id', bookCtrl.addReviewDoer);
+
+ // app.get('/api/user/books', userCtrl.getReviewed)
 
 
 

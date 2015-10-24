@@ -9,6 +9,8 @@ $scope.showAddbookButton = false;
 //for when google got nothing
 $scope.noSearchResults = false;
 
+$scope.showAlreadyReviewedBookMessage = false;
+
 
 $scope.addBookNotListed = function(){
 
@@ -120,6 +122,12 @@ $scope.resetSelect = function(){
   $scope.reviewTime = false;
 
 }
+
+$scope.alreadyReviewedBook = function(){
+$scope.showAlreadyReviewedBookMessage = true;
+//countdown and reset
+
+}
                                                           // here get reviews
 $scope.targetForReview= function(targetForReview){
 
@@ -130,15 +138,25 @@ $scope.targetForReview= function(targetForReview){
                                                         //here add to db
 $scope.doAReview = function(targetBookForReview, testRate){
 
+$scope.doit = true;
+
+$scope.reviewedInThePastBooks = userService.getBooksReviewed($scope.user._id).then(function(successR){
+  $scope.reviewedInThePastBooks = successR.data.booksReviewed;
+});
+
+for(var i = 0; i < reviewedInThePastBooks.length; i++){
+  if(reviewedInThePastBooks[i].title == targetBookForReview){
+    $scope.alreadyReviewedBook();
+    $scope.doit = false;
+  }
+}
   // $scope.getUser().then(function(sucess){
-
-
-
-
+if($scope.doit)
+{
   bookService.getBookIdFromTitle(targetBookForReview).then(function(successResult){
 
 
-  console.log(3333, $scope.user);
+
     var newBookId = '';
       $scope.targetBookForReview.image = "n/a";
   ////need to look here for the book
@@ -151,21 +169,22 @@ $scope.doAReview = function(targetBookForReview, testRate){
             .then(function(response){
               bookService.addReview(newBookId, testRate.violence, testRate.loveEct, testRate.suspence, testRate.realism, testRate.horror, testRate.humor, testRate.scienceFiction, testRate.supernaturalContent, testRate.readingLevel)})
               .then(function(response){
-                console.log($scope.user._id)
                 bookService.addBookReviewDoer($scope.user._id, newBookId)
+              }).then(function(response){
+                userService.addReviewToUser($scope.user._id, newBookId)
               })
                 .then(function(response){
                   $scope.reviewTime = false;});
 
 
   }else {
-console.log(successResult.data[0]._id)
-console.log($scope.user._id)
 
           ///here for bookID?
           bookService.addReview(successResult.data[0]._id, testRate.violence, testRate.loveEct, testRate.suspence, testRate.realism, testRate.horror, testRate.humor, testRate.scienceFiction, testRate.supernaturalContent, testRate.readingLevel)
           .then(function(response){
             bookService.addBookReviewDoer($scope.user._id, successResult.data[0]._id)
+          }).then(function(response){
+            userService.addReviewToUser($scope.user._id, successResult.data[0]._id)
           })
             .then(function(response){
               $scope.reviewTime = false;});
@@ -176,6 +195,6 @@ console.log($scope.user._id)
   })
   // })
   }
-
+}
 //need to redirect here for log in
 })

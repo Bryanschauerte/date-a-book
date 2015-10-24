@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = require('../models/userModel.js');
 	// BooksReviewed = require('./booksReviewed.js');
 //you dont need to inject or req model when making a mongo ref
 

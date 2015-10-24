@@ -1,4 +1,5 @@
 var User = require('../models/userModel.js');
+var mongoose = require('mongoose');
 
 module.exports = {
 
@@ -13,8 +14,17 @@ module.exports = {
     });
   },
 
+  getBooksReviewed: function(req, res){
+    User.findById(req.params.id)
+      .populate('booksReviewed')
+        .exec(function(err, books){
+          res.send(books);
+    })
+
+  },
+
   //
-  getUser : function($q, $timeout){
+  getUser: function($q, $timeout){
     var deferred = $q.defer();
   return $http({
     method:"GET",
@@ -22,7 +32,6 @@ module.exports = {
   }).then(function(res){
     deferred.resolve(res.data)
   })
-  console.log(deferred.promise);
   return deferred.promise;
 },
 
@@ -47,6 +56,21 @@ module.exports = {
       }else {
         res.send(user);
       }
+    })
+
+  },
+
+  reviewToAddToUser: function(req, res){
+    User.findById(req.params.id, function(err, user){
+      console.log(req.params.id, req.body.bookID)
+      user.booksReviewed.push(new mongoose.Types.ObjectId(req.body.bookID));
+      user.save(function(err, data) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.send(data);
+        }
+      })
     })
 
   }

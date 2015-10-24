@@ -1,30 +1,30 @@
 .mainColor, body {
 
-  background-color: #403075;
+  background-color: #EBEBEB;
 }
 
-.firstAccent {
-  background-color: #582A72;
+.secondMain {
+  background-color: #C3D7DF;
 
 }
 
-.secondAccent {
+.thirdMain {
 
-  background-color: #2E4172;
+  background-color: #6991AC;
 }
 
-.lightAccent {
+.firstDGreyAccent {
 
-  background-color: #887CAF;
+  background-color: #67727A;
 }
 
-.blueAccentOne {
+.SecondOrangeAccent {
 
-  background-color: #7887AB;
+  background-color: #D75C37;
 }
 
-.blueAccentTwo {
-  background-color: #4F628E;
+.warningColor {
+  background-color: #BB0F00;
 }
 
 body {
@@ -38,5 +38,5 @@ body {
 
  .scoreToShow {
 
-   
+
  }
