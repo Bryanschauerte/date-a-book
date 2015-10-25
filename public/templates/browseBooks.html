@@ -1,19 +1,8 @@
 
-<nav>
-  <div class="nav-wrapper teal lighten-2">
-    <a href="#" class="brand-logo">Date-A-book</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/#/home">Home</a></li>
-      <li><a href="/#/browseBooks">Browse Books</a></li>
-      <li><a href="/#/pastReads">Books you've Read/rated</a></li>
-
-    </ul>
-  </div>
-</nav>
 
 <div class = "header">
   <h5>Do a search for a book based on characteristics</h5>
-  <button class="btn waves-effect waves-light" ng-click = "resetSeaches()"type="submit" name="action">Reset Search
+  <button class="btn waves-effect waves-light firstDGreyAccent" ng-click = "resetSeaches()"type="submit" name="action">Reset Search
   </button>
 </div>
 
@@ -23,7 +12,7 @@
     $('select').material_select();
   });</script>
 <!-- main seach criteria -->
-<div class = "container">
+<div class = "container mainColor homePage">
 
 <div class = "seachingFor" ng-show = "showSearchFields">
 
@@ -123,13 +112,15 @@
 
 
 </div>
-<a class="waves-effect waves-light btn" ng-click = "reviewsSearch(lookingFor, range)"><i class="material-icons left">done</i>search!</a>
+<a class="waves-effect waves-light btn firstDGreyAccent" ng-click = "reviewsSearch(lookingFor, range)"><i class="material-icons left">done</i>search!</a>
 
 </div>
 
 <!-- populated -->
 
-
+<div ng-if= "showLoading" class="progress">
+    <div class="indeterminate"></div>
+</div>
 
 <div class = "col s12 lightAccent column" >
 
@@ -167,7 +158,7 @@
       <p class = "scoreToShow">Science Fiction:  <b>{{result.averageReviews.scienceFiction}}/10</b></p>
       <p class = "scoreToShow">Supernatural:  <b>{{result.averageReviews.supernaturalContent}}/10</b></p>
       <p class = "scoreToShow">Reading level:  <b>{{result.averageReviews.readingLevel}}/10</b></p>
-<p>{{result}}</p>
+
     </div>
     <div class="card-action">
       <a href="#">Take me to see how I rated this book!</a>
@@ -179,9 +170,6 @@
     <!-- end of ng repeat -->
   </div>
 
-<!--
-    <button class="btn waves-effect waves-light" type="submit" name="action">btn<i class="material-icons right">send</i>
-  </button> -->
 </div>
 
 </div>

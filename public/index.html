@@ -11,7 +11,18 @@
 <body ng-controller="mainCtrl">
 
 
+  <nav>
+    <div class="nav-wrapper SecondOrangeAccent lighten-2">
+      <a href="#" class="brand-logo">Next-Reads</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li ng-if = "user">Hi, {{user.name}}</li>
+        <li><a href="/#/home">Home</a></li>
+        <li><a href="/#/browseBooks">Browse Books</a></li>
+        <li><a href="/#/pastReads">Books you've Read/rated</a></li>
 
+      </ul>
+    </div>
+  </nav>
 
 
       <ng-view ng-cloak></ng-view>

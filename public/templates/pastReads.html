@@ -3,28 +3,12 @@
   });</script>
 
 
-<!-- <script>
-  $(document).ready(function() {
-  $('input#input_text, textarea#textarea1').characterCounter();
-});
-</script> -->
 
-  <nav>
-    <div class="nav-wrapper mainColor lighten-2">
-      <a href="#" class="brand-logo center ">Date-A-book</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/#/home">Home</a></li>
-        <li><a href="/#/browseBooks">Browse Books</a></li>
-        <li><a href="/#/pastReads">Books you've Read/rated</a></li>
-
-      </ul>
-    </div>
-  </nav>
 
 <div class = "row">
 
 
-<div class = "col s3 firstAccent">
+<div class = "col s3 firstAccent secondMain">
 
 
   <h1>Review Books!</h1>
@@ -50,8 +34,11 @@
           </div>
         </div>
 <div>
+  <div ng-if= "showLoading" class="progress">
+      <div class="indeterminate"></div>
+  </div>
         <md-input-container>
-        <button class="btn waves-effect waves-light" type="submit" ng-click = "getBooksRegSearch(regSearchText, typeOfSearch)" name="action" > Search!
+        <button class="btn waves-effect waves-light firstDGreyAccent" type="submit" ng-click = "getBooksRegSearch(regSearchText, typeOfSearch)" name="action" > Search!
           <i class="material-icons done"></i>
         </button>
       </md-input-container>
@@ -74,6 +61,7 @@
           <p>Reviews from all users will be added to our library and will be used to help yourself and others find the books they enjoy.</p>
           <p>Score books 0-10 (0 being the lowest amount, 10- the highest) for each characteristic of that book.</p>
           <p>Find a book to review by searching for the title or the author on the right, If you dont see the book you want to review... Add it!</p>
+          <p class = "importantText warningColor">If you dont see a book PLEASE ADD! We can use all the book information we can get! If you add it, others can find it.</p>
         </div>
         <!-- <div class="card-action">
           <a href="#">This is the one to review</a>
@@ -84,16 +72,18 @@
   </div>
 
 </div>
+
 <!-- books populated container -->
-<div class = "col s9 lightAccent">
+<div class = "col s9 firstDGreyAccent z-depth-4">
 
 
-  <div class="row" ng-if = "!reviewTime && !addingABook"  ng-repeat = "book in googleBookSearch" ng-class-odd = "'blueAccentOne'" ng-class-even= "'blueAccentTwo'" class = "row" ng-click = 'targetForReview(book)'>
+  <div class="row" ng-if = "!reviewTime && !addingABook"  ng-repeat = "book in googleBookSearch track by $index" ng-class-odd = "'firstDGreyAccent'" ng-class-even= "'thirdMain'" class = "row" ng-click = 'targetForReview(book)'>
     <div class="col s12">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
           <span class="card-title"><tr>Title:  {{book.title}}</tr></span>
-          <p ng-repeat = "author in book.author"><tr>Author:  {{author}}</tr></p>
+          <p ng-repeat = "author in book.author track by $index"><tr>Author:  {{author}}</tr></p>
+          <!-- <p ng-if = "book.author">Author: {{book.author}}</p> -->
           <p>{{book.genre}}</p>
           <p>{{book.publishDate}}</p>
           <p>{{book.description}}</p>
@@ -106,28 +96,20 @@
     </div>
   </div>
 
-    <button class="btn waves-effect waves-light" ng-if = "showAddbookButton &&!addingABook && !reviewTime" ng-click = "addBookNotListed()"type="submit" name="action">Add a book Not listed
+    <button class="btn waves-effect waves-light thirdMain" ng-if = "showAddbookButton &&!addingABook && !reviewTime" ng-click = "addBookNotListed()"type="submit" name="action">Add a book Not listed
     <i class="material-icons right">send</i>
   </button>
 </div>
 
-<!-- end books populated container -->
 
-<!-- add a book not included -->
   <div ng-show= "addingABook" class = "col s9 lightAccent">
-<!--  -->
 
-<!-- <script>
-
-
-
-</script> -->
 
 <div class="row" >
   <div class="col s12">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <h3>Add a book not Shown</h3>
+        <h5>Add a book not Shown</h5>
 <!--  -->
 <div class="row">
   <form class="col s12">
@@ -170,8 +152,9 @@
 <!-- <div class = 'instructions'> -->
 <p class = 'instructions'>Mark the characteristics of the book with '0' being no (whatever charateristic) to '10' a ridiculous amout of that characteristic.</p>
 <!-- </div> -->
-
-
+<!-- <div class = 'column'> -->
+<div class = 'row'>
+<div class = "col s6">
   <form action="#" ng-model = "bookToAdd.violence">
     <p class="range-field"><b>Violence: {{bookToAdd.violence}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.violence"/>
@@ -184,8 +167,9 @@
     </p>
   </form>
 
+</div>
 
-
+<div class = "col s6">
   <form action="#" >
     <p class="range-field"><b>Suspence: {{bookToAdd.suspence}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.suspence"/>
@@ -199,7 +183,9 @@
     </p>
   </form>
 
+</div>
 
+  <div class = "col s6">
   <form action="#" ng-model = "bookToAdd.horror">
     <p class="range-field"><b>Horror: {{bookToAdd.horror}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.horror"/>
@@ -212,6 +198,9 @@
     </p>
   </form>
 
+</div>
+
+  <div class = "col s6">
   <form action="#" ng-model = "bookToAdd.supernaturalContent">
     <p class="range-field"><b>Supernatural Content: {{bookToAdd.supernaturalContent}}</b>
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.supernaturalContent"/>
@@ -224,31 +213,32 @@
       <input type="range" id="test5" min="0" max="10" ng-model = "bookToAdd.readingLevel"/>
     </p>
   </form>
+</div>
 
 
 
 <!--  -->
-  </div>
+<a class="waves-effect waves-light btn firstDGreyAccent" ng-click = "moveNewBook(bookToAdd)"><i class="material-icons left"></i>Add this Book!!</a>
+<a class="waves-effect waves-light btn warningColor" ng-click = "notAddingABook()"><i class="material-icons left"></i>Nevermind! I dont want add!</a>
 
-</div>
-</div>
+    </div>
+
+  </div>
+  </div>
 
 </div>
 <!-- end of the crit -->
 
-<a class="waves-effect waves-light btn" ng-click = "moveNewBook(bookToAdd)"><i class="material-icons left"></i>Add this Book!!</a>
-<a class="waves-effect waves-light btn" ng-click = "notAddingABook()"><i class="material-icons left"></i>Nevermind! I dont want add!</a>
 
   <!--  -->
 </div>
 
 
 <!--end add a book not included -->
-
+</div>
 
 <!-- review of book input -->
 <div ng-if = "reviewTime" ng-if= "!addingABook">
-
 
   <div class="col s9">
     <div class="card blue-grey darken-1">
@@ -317,7 +307,7 @@
 
 
       </div>
-      <a class="waves-effect waves-light btn" ng-click = "doAReview(targetBookForReview.title, testRate)"><i class="material-icons left">done</i>send</a>
+      <a class="waves-effect waves-light btn firstDGreyAccent" ng-click = "doAReview(targetBookForReview.title, testRate)"><i class="material-icons left">done</i>send</a>
 
 
     </div>

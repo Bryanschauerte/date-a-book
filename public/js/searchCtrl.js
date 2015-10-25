@@ -11,33 +11,18 @@ $scope.enterInfo = true;
 
 // dummy data
 
-$scope.searchResults = [{
-  title: "how to be a shoe",
-  author: ["red-sock", "blueSock"],
-  publishDate: "1222",
-  description:"How to think and do like a shoe. Stop being a sock today!",
-  loveEct:0,
-  violence:0,
-  suspence:0,
-  realism:0,
-  horror:0,
-  humor:0,
-  scienceFiction:0,
-  supernaturalContent:0,
-  readingLevel:0
-
-}]
+$scope.searchResults = []
 // dummy data
 
 $scope.lookingFor = {
   genre: "",
-  violence: 2,
-  loveEct: 9,
+  violence: 0,
+  loveEct: 0,
   suspence: 0,
-  realism: 10,
+  realism: 0,
   horror: 0,
-  humor: 4,
-  scienceFiction: 7,
+  humor: 0,
+  scienceFiction: 0,
   supernaturalContent: 0,
   readingLevel: 0
 }

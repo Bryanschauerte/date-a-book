@@ -5,50 +5,44 @@
 
 </script>
 
-<nav>
-  <div class="nav-wrapper teal lighten-2">
-    <a href="#" class="brand-logo">Date-A-book</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/#/home">Home</a></li>
-      <li><a href="/#/browseBooks">Browse Books</a></li>
-      <li><a href="/#/pastReads">Books you've Read/rated</a></li>
-
-    </ul>
-  </div>
-</nav>
-
-<div class="container about">
+<div class = 'background'>
+<div class="container secondMain homePage">
   <h5>About The Site</h5>
-  <h6>An Online dating sites for people to find books.</h6>
+  <h6>A way to search for types of books you enjoy.</h6>
   <hr>
+
+
+
   <div class="row">
-    <div class="col s12 m4 l4">
-      <h3>Why use this site??</h3>
-      <h4>Books are sorted by characteristics</h>
-      <h6><p>Just like a dating site, we sort our books by their defining charatericstics.</p></h6>
-      <ol>
-        <li>Amount of romance- Ever read a book thats excellent, but then all a sudden the hero starts kissing vampires?.. Want it or don't, you can specify here.</li>
-        <li>Amount of science fiction - On a rating of fancy new gadgets to all the charactors being toasters, How much sci-Fi do you want?</li>
-        <li>Amount of non-fiction - Documented events or... a loose story based on someone/thing's life</li>
-        <li>Amount of violence- Kid safe to... apocoliptic/genocidal/zombie/blood and arms flying all over...</li>
-        <li>Try it out to see the rest!</li>
-      </ol>
+    <div class="col s12 m4 l4 container">
+      <h5>Why use this site??</h5>
+      <p class = "importantText">Books are sorted by characteristics</p>
+      <p>We sort our books by their defining charatericstics.</p>
+      <ul>
+        <li><p>  Amount of romance- Ever read a book thats excellent, but then all a sudden the hero starts kissing vampires?.. Want it or don't, you can specify here.</p></li>
+        <li><p>  Amount of science fiction - On a rating of fancy new gadgets to all the charactors being toasters, How much sci-Fi do you want?</p></li>
+        <li><p>  Amount of violence- Kid safe to... apocoliptic/genocidal/zombie/blood and arms flying all over...</p></li>
+        <li><p>  You get the idea, Try it out!</p></li>
+      </ul>
 
     </div>
-    <div class="col s12 m4 l4">
-      <h6>What This Site Does..</h6>
-      <div class="card blue-grey darken-1">
+    <div class="col s12 m4 l4 container">
+      <div class="card blue-grey darken-1 z-depth-2">
         <div class="card-content white-text">
-          <!-- <img src="http://www.cliparthut.com/clip-arts/122/school-secretary-clip-art-122405.gif" width="64" height="64"> -->
-          <p>The books in this collection are being sorted by very particular things... And in order to run, and continue to be free, we need your input.
-          Please, rate the books you've read. Not a 1-5 star thing that we would use to track you (cough** like other sites **cough). We dont save what you search for and we use the average of allll users to sort the books.
-        We tried to make rating as quick and amusing as possible, so please give it a go. We need you. <br> The price of admission is to rate three books...</p>
+            <h6  class = "importantText">How it works, the short way</h6>
+          <ul>
+            <li class = "listSpace"><p>Users review book attributes.</p></li>
+
+            <li class = "listSpace"><p>Book attriutes go into the database</p></li>
+            <li class = "listSpace"><p>Users mark what they want</p></li>
+            <li><p>Site shows fitting books</p></li>
+          </ul>
         </div>
         <div class="card-action">
           Login Here to get started!
-          <div class="login-container">
-            <div><a href="/auth/facebook"><i class="fa fa-facebook"></i>Facebook Login</a></div>
-            <div><a href="/auth/google"><i class="fa fa-google"></i>Google Login</a></div>
+          <div class = "z-depth-5">
+            <div><a href="/auth/facebook"><i class="fa fa-facebook"></i><h6>Facebook Login</h6></a></div>
+            <div><a href="/auth/google"><i class="fa fa-google"></i><h6>Google Login</h6></a></div>
           </div>
         </div>
       </div>
@@ -56,21 +50,22 @@
 
     <div class="col s12 m4 l4">
       <h6>Links to other helpful sites finding books by author or other traditional means</h6>
-      <ul class="collapsible">
+      <ul class="collapsible z-depth-3">
         <li class="active">
           <div class="collapsible-header"><i class="mdi-av-web"></i>Amazon</div>
-          <div class="collapsible-body"><p>Basically, the best place to grab cheap books. Handheld or digital<a href = "http://www.amazon.com/">Click to visit</a></p></div>
+          <div class="collapsible-body"><p>Basically, the best place to grab cheap books. Handheld or digital<a href = "http://www.amazon.com/"> Click to visit</a></p></div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Textbooks for you, youngens</div>
-          <div class="collapsible-body"><p>Ah yes. Textbooks. If you cant find a cheap one on Amazon, try here..<a href = "http://www.bookfinder.com/">Bookfinder</a> that one thingy that just doesn't seem to want to...</p></div>
+          <div class="collapsible-header"><i class="mdi-editor-format-align-justify"></i>Need Textbooks?</div>
+          <div class="collapsible-body"><p>Ah yes. Textbooks. If you cant find a cheap one on Amazon, try here..<a href = "http://www.bookfinder.com/"> Bookfinder</a></p></div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="mdi-av-play-shopping-bag"></i>Books that dont need reading</div>
-          <div class="collapsible-body"><p>Ha, audiobooks...<a href = "http://www.audiobooks.com/">Audiobooks.com</a></p></div>
+          <div class="collapsible-header"><i class="mdi-av-play-shopping-bag"></i>Books not for reading</div>
+          <div class="collapsible-body"><p>Ha, audiobooks...<a href = "http://www.audiobooks.com/"> Audiobooks.com</a></p></div>
         </li>
 
       </ul>
     </div>
   </div>
+</div>
 </div>

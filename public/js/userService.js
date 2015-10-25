@@ -29,6 +29,8 @@ this.getUser = function(){
   .then(function(response){
     return response.data;
 
+  }, function(fail){
+    return "fail";
   });
 },
 this.getBooksReviewed = function(userID){

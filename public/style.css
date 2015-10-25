@@ -27,16 +27,23 @@
   background-color: #BB0F00;
 }
 
-body {
-
-  background-color: #9775AA;
-}
 
 .instructions{
   background-color: #261758;
 }
-
- .scoreToShow {
-
-
+.importantText {
+  font-weight: bold;
+}
+ .listSpace{
+   margin: 0 0 5px 0;
  }
+
+.background {
+background-image: url("./library.jpeg");
+background-size: contain;
+
+}
+
+.homePage {
+  padding: 2%;
+}

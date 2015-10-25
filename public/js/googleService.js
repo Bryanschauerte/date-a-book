@@ -29,15 +29,6 @@ var deferred = $q.defer();
         }
         formatedData.push(item);
 
-        // var notThere ={
-        //   notOnGoogle :
-        //   author: '',
-        //   title: '',
-        //   publishDate: '',
-        //   genre: ''
-        // }
-        //
-        // formatedData.push(notThere);
       }
       deferred.resolve(formatedData);
     }, function(err){
@@ -47,28 +38,3 @@ var deferred = $q.defer();
   }
 
 })
-
-//
-// var item = {
-//   Author: parsedResponse[i].volumeInfo.authors,
-//   Title: parsedResponse[i].volumeInfo.title,
-//   Description: parsedResponse[i].volumeInfo.description,
-//
-//   image: (if(parsedResponse[i].volumeInfo.imageLinks.thumbnail){
-//     parsedResponse[i].volumeInfo.imageLinks.thumbnail
-//   }else{
-//     "no Image"
-//   }),
-//
-//   ImageLinkLarge: (if(parsedResponse[i].volumeInfo.imageLinks.large){
-//     parsedResponse[i].volumeInfo.imageLinks.large
-//   }else{
-//     "no Image"
-//   }),
-//   previewLink: (if(parsedResponse[i].volumeInfo.previewLink){
-//     parsedResponse[i].volumeInfo.previewLink
-//   }else {
-//     "no preview"
-//   }),
-//   category: parsedResponse[i].mainCategory
-// }
