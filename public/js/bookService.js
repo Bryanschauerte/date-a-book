@@ -7,7 +7,7 @@ var app = angular.module('dateABook').service('bookService', function($http, $q)
 this.getBookIdFromTitle  = function(bookTitle){
   return $http({
     method: 'GET',
-    url:"http://localhost:8881/api/bookName/" +bookTitle
+    url:"/api/bookName/" +bookTitle
 
   });
 
@@ -16,7 +16,7 @@ this.getBookIdFromTitle  = function(bookTitle){
 this.getAllBooks = function(){
   return $http({
     method: "GET",
-    url:"http://localhost:8881/api/book/"
+    url:"/api/book/"
   })
 
 },
@@ -24,7 +24,7 @@ this.getAllBooks = function(){
 this.getBookFromId = function(bookId){
   return $http({
     method: "GET",
-    url:"http://localhost:8881/api/book/" +bookId
+    url:"/api/book/" +bookId
   })
 
 },
@@ -37,7 +37,7 @@ this.addBook = function(title, author, genre, image, description, publishDate){
 
     return $http({
       method: "POST",
-      url:"http://localhost:8881/api/book",
+      url:"/api/book",
       data: {
         title: title,
     		author: author,
@@ -56,7 +56,7 @@ this.addBook = function(title, author, genre, image, description, publishDate){
   this.addReview = function( bookID, violence, loveEct, suspence, realism, horror, humor, scienceFiction, supernaturalContent, readingLevel){
     return $http({
       method: "PUT",
-      url:"http://localhost:8881/api/book/" +bookID,
+      url:"/api/book/" +bookID,
       data: {
 
 attr: {
@@ -78,7 +78,7 @@ attr: {
 
     return $http({
       method: "PUT",
-      url:"http://localhost:8881/api/bookReviewer/" +bookID,
+      url:"/api/bookReviewer/" +bookID,
       data: {
         userID: userID
       }

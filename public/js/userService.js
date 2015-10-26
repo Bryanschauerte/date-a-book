@@ -4,7 +4,7 @@ var app = angular.module('dateABook').service('userService', function($http, $q)
 this.currentFaceBookUser = function(){
   return $http({
     method: "GET",
-    url:"http://localhost:8881/api/user/facebook"
+    url:"/api/user/facebook"
   })
   .then(function(response){
     return response.data;
@@ -14,7 +14,7 @@ this.currentFaceBookUser = function(){
 this.currentGoogleUser = function(){
   return $http({
     method: "GET",
-    url:"http://localhost:8881/api/user/google"
+    url:"/api/user/google"
   })
   .then(function(response){
     return response.data;
@@ -24,7 +24,7 @@ this.currentGoogleUser = function(){
 this.getUser = function(){
   return $http({
     method: "GET",
-    url:"http://localhost:8881/api/user"
+    url:"/api/user"
   })
   .then(function(response){
     return response.data;
@@ -36,7 +36,7 @@ this.getUser = function(){
 this.getBooksReviewed = function(userID){
   return $http({
     method: "GET",
-    url: "http://localhost:8881/api/user/books/" + userID
+    url: "/api/user/books/" + userID
   });
 
 },
@@ -45,7 +45,7 @@ this.addReviewToUser = function(userID, bookID){
 
   return $http({
     method: "PUT",
-    url:"http://localhost:8881/api/user/addBookReview/" + userID,
+    url:"/api/user/addBookReview/" + userID,
     data: {
       bookID: bookID
     }
