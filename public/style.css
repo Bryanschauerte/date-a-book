@@ -1,6 +1,7 @@
 .mainColor, body {
 
   background-color: #EBEBEB;
+  height: 100%;
 }
 
 .secondMain {
@@ -46,4 +47,19 @@ background-size: contain;
 
 .homePage {
   padding: 2%;
+}
+
+.pageTitle {
+
+height: 100%;
+padding: 3%;
+}
+
+.descriptionContainer {
+    height: 150px;
+    overflow: scroll;
+}
+.overflowContainer {
+      overflow: scroll;
+      height:75%;
 }

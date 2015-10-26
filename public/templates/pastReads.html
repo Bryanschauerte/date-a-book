@@ -25,7 +25,7 @@
 
         <div>
           <div class="input-field col s3">
-            <select ng-model = "typeOfSearch">
+            <select ng-model = "typeOfSearch" required>
               <option value="" selected>Type</option>
               <option value="title">Title</option>
               <option value="author">Author</option>
@@ -84,14 +84,14 @@
           <span class="card-title"><tr>Title:  {{book.title}}</tr></span>
           <p ng-repeat = "author in book.author track by $index"><tr>Author:  {{author}}</tr></p>
           <!-- <p ng-if = "book.author">Author: {{book.author}}</p> -->
+
+
+
+          <!-- <p ng-repeat = "author in targetBookForReview.author"><tr>Author:  {{author}}</tr></p> -->
           <p>{{book.genre}}</p>
           <p>{{book.publishDate}}</p>
-          <p>{{book.description}}</p>
+          <div ng-if = "book.description" class = "descriptionContainer"><p>{{book.description}}</p></div>
         </div>
-        <!-- <div class="card-action">
-          <a href="#">This is the one to review</a>
-
-        </div> -->
       </div>
     </div>
   </div>
@@ -146,13 +146,12 @@
   <label>What kind of book was it?</label>
       </div>
 
-    <!-- </div> -->
+
   </form>
 </div>
 <!-- <div class = 'instructions'> -->
 <p class = 'instructions'>Mark the characteristics of the book with '0' being no (whatever charateristic) to '10' a ridiculous amout of that characteristic.</p>
-<!-- </div> -->
-<!-- <div class = 'column'> -->
+
 <div class = 'row'>
 <div class = "col s6">
   <form action="#" ng-model = "bookToAdd.violence">
@@ -223,7 +222,7 @@
 
     </div>
 
-  </div>
+    </div>
   </div>
 
 </div>
@@ -250,7 +249,8 @@
 
       <div class="container reviewCriteria">
 
-
+<div class = "row">
+    <div class = "col s6">
         <form action="#" ng-model = "testRate.violence">
           <p class="range-field"><b>Violence: {{testRate.violence}}</b>
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.violence"/>
@@ -262,8 +262,8 @@
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.loveEct"/>
           </p>
         </form>
-
-
+</div>
+<div class = "col s6">
 
         <form action="#" ng-model = "testRate.suspence">
           <p class="range-field"><b>Suspence: {{testRate.suspence}}</b>
@@ -277,7 +277,8 @@
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.realism"/>
           </p>
         </form>
-
+      </div>
+      <div class = "col s6">
 
         <form action="#" ng-model = "testRate.horror">
           <p class="range-field"><b>Horror: {{testRate.horror}}</b>
@@ -290,7 +291,8 @@
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.scienceFiction"/>
           </p>
         </form>
-
+      </div>
+      <div class = "col s6">
         <form action="#" ng-model = "testRate.supernaturalContent">
           <p class="range-field"><b>Supernatural Content: {{testRate.supernaturalContent}}</b>
             <input type="range" id="test5" min="0" max="10" ng-model = "testRate.supernaturalContent"/>
@@ -304,20 +306,16 @@
           </p>
         </form>
 
-
+      </div>
+    </div>
 
       </div>
-      <a class="waves-effect waves-light btn firstDGreyAccent" ng-click = "doAReview(targetBookForReview.title, testRate)"><i class="material-icons left">done</i>send</a>
+      <a class="waves-effect waves-light btn firstDGreyAccent" ng-click = "doAReview(targetBookForReview.title, testRate)"><i class="material-icons left">Done and Submit!</i></a>
 
 
+      <a class="waves-effect waves-light btn warningColor" ng-click = "resetSelect()"><i class="material-icons left">Not the book! Take me back!</a>
     </div>
 
-
-
-    <div class = 'card-action'>
-
-      <h4 ng-click = 'resetSelect()'>Opps-- Not the book! Take me back!</h4>
-    </div>
   </div>
 </div>
 

@@ -12,7 +12,7 @@
     $('select').material_select();
   });</script>
 <!-- main seach criteria -->
-<div class = "container mainColor homePage">
+<div class = "container mainColor homePage overflowContainer">
 
 <div class = "seachingFor" ng-show = "showSearchFields">
 
@@ -133,12 +133,12 @@
           <p><tr>Author:  {{result.author}}</tr></p>
           <p>{{result.genre}}</p>
           <p>Published:  {{result.publishDate}}</p>
-          <p>Description:  {{result.description}}</p>
+          <div class = "descriptionContainer"><p>Description:  {{result.description}}</p></div>
 
         </div>
-        <div class="card-action">
+        <!-- <div class="card-action">
           <a href="#">Take me to see a preview of this book!</a>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -160,9 +160,9 @@
       <p class = "scoreToShow">Reading level:  <b>{{result.averageReviews.readingLevel}}/10</b></p>
 
     </div>
-    <div class="card-action">
+    <!-- <div class="card-action">
       <a href="#">Take me to see how I rated this book!</a>
-    </div>
+    </div> -->
   </div>
 </div>
 

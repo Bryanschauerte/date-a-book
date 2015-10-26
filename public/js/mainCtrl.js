@@ -35,6 +35,7 @@ $scope.notAddingABook= function(){
 
 $scope.moveNewBook = function(bookToAdd) {
 $scope.bookToAdd.title = $scope.capitalizeTitle(bookToAdd.title);
+$scope.bookToAdd.author = $scope.capitalizeTitle(bookToAdd.author);
 
 
 var newBookId='';
@@ -102,7 +103,6 @@ $scope.getUser = function(){
       $scope.user =res;
 
             if(res == 'fail'){
-              console.log('ding')
               $location.path("/route");
               $scope.showSimpleToast("You Need to be logged in to do that!");
             }
@@ -119,10 +119,11 @@ else {
 $scope.capitalizeTitle = function(string){
   var newArr = string.split(" ");
   for(var i = 0; i < newArr.length; i++){
-    newArr[i] = newArr[i].charAt(0).toUpperCase() + newArr[i].slice(1);
+    newArr[i] = newArr[i].charAt(0).toUpperCase() + newArr[i].slice(1).toLowerCase();
 }
 return newArr.join(' ');
 }
+
 
 
 $scope.getBooksRegSearch = function(regSearchText, typeOfSearch){
@@ -133,12 +134,12 @@ $scope.getBooksRegSearch = function(regSearchText, typeOfSearch){
   if(typeOfSearch == "title"){
 
     bookService.getBookIdFromTitle(searchText).then(function(initialResponse){
-console.log(initialResponse)
         $scope.regBooksToShow = googleService.getBooksRegSearch(searchText, typeOfSearch)
           .then(function(res){
-
             for(var i=0; i< res.length; i++){
+              if(res[i].author && res[i].author.length > 1){
             res[i].author= res[i].author.join(', ');
+          }
           }
 
             $scope.googleBookSearch = res;
@@ -155,7 +156,8 @@ console.log(initialResponse)
        $scope.regBooksToShow = googleService.getBooksRegSearch(searchText, typeOfSearch)
          .then(function(res){
            for(var i=0; i< res.length; i++){
-           res[i].author= res[i].author.join(', ');
+             if(res[i].author && res[i].author.length > 1){
+           res[i].author= res[i].author.join(', ');}
          }
 
            $scope.googleBookSearch = res;
@@ -188,20 +190,28 @@ $scope.doAReview = function(targetBookForReview, testRate){
   $scope.reviewTime = true;
   $scope.reviewedInThePastBooks = userService.getBooksReviewed($scope.user._id).then(function(successR){
     $scope.reviewedInThePastBooks = successR.data.booksReviewed;
-  });
-
-  for(var i = 0; i < reviewedInThePastBooks.length; i++){
-    if(reviewedInThePastBooks[i].title == targetBookForReview){
+//
+    }).then(function(success){
+  for(var i = 0; i < $scope.reviewedInThePastBooks.length; i++){
+    if($scope.reviewedInThePastBooks[i].title == targetBookForReview){
       $scope.alreadyReviewedBook();
       $scope.doit = false;
+      $scope.reviewTime = false;
+      $scope.showLoading = false;
     }
   }
+  //
+}).then(function(res){
+
+
   if($scope.doit) {
     bookService.getBookIdFromTitle(targetBookForReview).then(function(successResult){
       var newBookId = '';
       $scope.targetBookForReview.image = "n/a";
 
     if(successResult.data.length == 0){
+
+
           bookService.addBook($scope.targetBookForReview.title, $scope.targetBookForReview.author, $scope.targetBookForReview.genre, $scope.targetBookForReview.image, $scope.targetBookForReview.description, $scope.targetBookForReview.publishDate)
             .then(function(response){
             newBookId = response.data._id;
@@ -216,7 +226,9 @@ $scope.doAReview = function(targetBookForReview, testRate){
                   .then(function(response){
                     $scope.reviewTime = false;
                     $scope.showLoading = false;
+                    $scope.showSimpleToast($scope.targetBookForReview.title + " review added!")
                   });
+                  //if($scope.doIt == false)
     }else {
             bookService.addReview(successResult.data[0]._id, testRate.violence, testRate.loveEct, testRate.suspence, testRate.realism, testRate.horror, testRate.humor, testRate.scienceFiction, testRate.supernaturalContent, testRate.readingLevel)
             .then(function(response){
@@ -227,14 +239,16 @@ $scope.doAReview = function(targetBookForReview, testRate){
               .then(function(response){
                 $scope.reviewTime = false;
                 $scope.showLoading = false;
+                $scope.showSimpleToast($scope.targetBookForReview.title + " review added!")
               });
             }
           })
         }
-        $scope.showSimpleToast(targetBookForReview.title + " review added!")
+
         $scope.googleBookSearch = [];
         $scope.regSearchText = '';
         $scope.showLoading = false;
+        })
       }
 
 })

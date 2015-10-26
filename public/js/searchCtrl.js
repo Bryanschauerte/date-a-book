@@ -34,7 +34,6 @@ $scope.getUser = function(){
   if(!$scope.user){
     $scope.user = userService.getUser().then(function(res){
       $scope.user =res;
-console.log($scope.user);
     })
 
   }
@@ -124,9 +123,6 @@ $scope.count = 0;
   }
 
     }
-  //
-
-console.log($scope.crit);
 
 var checker = function(){
   var matchCount = 0;
@@ -178,8 +174,6 @@ var checker = function(){
     if(matchCount >= 5){
       book.averageReviews = $scope.crit;
     $scope.searchResults.push(book);
-    console.log('ding')
-    console.log($scope.searchResults)
     }
 }
 checker();
@@ -190,7 +184,6 @@ for(var i = 0; i < $scope.searchResults.length; i++){
   $scope.searchResults[i].author = Array($scope.searchResults[i].author);
 
 }
-console.log($scope.searchResults);
 
 };
 
